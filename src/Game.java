@@ -31,4 +31,9 @@ public class Game {
         return (this.identifier.equals(comparedGame.identifier));
     }
 
+    // Returns this game price.
+    public Money getPrice() {
+        return this.price;
+    }
+
 }

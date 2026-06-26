@@ -1,7 +1,5 @@
-import java.lang.foreign.ValueLayout;
 import java.util.ArrayList;
 import java.util.Scanner;
-import.java.util.ArrayList;
 
 public class GameStore {
     public static void main(String[] args) {
@@ -14,17 +12,40 @@ public class GameStore {
 
             if (inputIdentifier.isEmpty()) {
                 break;
+            }
+            System.out.println("Enter game title: ");
+            String inputGameTitle = sc.nextLine();
+
+            if (inputGameTitle.isEmpty()) {
+                System.out.println("Title cannot be empty. Try again.");
+                continue;
+            }
+
+            SimpleDate inputReleaseDate = readDate(sc);
+            Money inputPrice = readMoney(sc);
+
+            Game game = new Game(inputIdentifier, inputGameTitle, inputReleaseDate, inputPrice);
+
+            if (!games.contains(game)) {
+                games.add(game);
             } else {
-                System.out.println("Enter game title: ");
-                String inputGameTitle = sc.nextLine();
-
-                SimpleDate inputReleaseDate = readDate(sc);
-
-
-
-
+                System.out.println("The game is already on the list. Try again.");
             }
         }
+        System.out.println("=== GAMES LIST ===");
+        for (Game game : games) {
+            System.out.println(game);
+        }
+        System.out.println();
+        System.out.println("Total games in list: " + games.size());
+
+        Money totalValue = new Money(0,0);
+
+        for (Game game : games) {
+            totalValue = totalValue.plus(game.getPrice());
+        }
+
+        System.out.println("Total inventory value: " + totalValue);
     }
 
     // Validate if input date is in correct format. Date returns in new SimpleDate object.
@@ -32,6 +53,11 @@ public class GameStore {
         while (true) {
             System.out.println("Enter release date (day.month.year)");
             String inputDate = sc.nextLine();
+
+            if (inputDate.isEmpty()) {
+                System.out.println("Input is empty. Try again.");
+                continue;
+            }
             if (!inputDate.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
                 System.out.println("Wrong date format. Use day.month.year, for example 24.03.2017.");
                 continue;
@@ -53,7 +79,7 @@ public class GameStore {
             }
 
             if (year < 1 || year > 9999) {
-                System.out.println("Wrong year. Year must cannot be below 9999.");
+                System.out.println("Wrong year. Year must be between 1 and 9999.");
                 continue;
             }
 
@@ -61,28 +87,29 @@ public class GameStore {
         }
     }
 
+    // Validate if input price is in correct format. Price returns as new Money object.
     public static Money readMoney(Scanner sc) {
         while (true) {
             System.out.println("Enter game price: ");
             String inputGamePrice = sc.nextLine();
 
-            if (!inputGamePrice.matches("\\d{1,2}\\.\\d{1,2}")) {
+            if (inputGamePrice.isEmpty()) {
+                System.out.println("Input is empty. Try again.");
+                continue;
+            }
+
+            if (!inputGamePrice.matches("\\d+\\.\\d{2}")) {
                 System.out.println("Wrong price format. Price format should be for example 19.99.");
                 continue;
             }
 
-            String[] moneyParts = inputGamePrice.split(".");
+            String[] moneyParts = inputGamePrice.split("\\.");
 
             int euros = Integer.valueOf(moneyParts[0]);
             int cents = Integer.valueOf(moneyParts[1]);
 
-            if (euros < 0) {
-                System.out.println("Invalid price. Euros cant be negative.");
-                continue;
-            }
-
-            if (cents < 0 || cents > 100) {
-                System.out.println("Invalid price. Cents cannot be below 100.");
+            if (cents < 0 || cents > 99) {
+                System.out.println("Invalid price. Cents must be between 0 and 99.");
                 continue;
             }
 
