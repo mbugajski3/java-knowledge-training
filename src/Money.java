@@ -25,4 +25,20 @@ public class Money {
         }
         return new Money(totalEuros, totalCents);
     }
+
+    public Money minus(Money addition) {
+        int thisTotalCents = (this.euros * 100) - this.cents;
+        int additionTotalCents = (addition.euros * 100) - addition.cents;
+
+        int difference = thisTotalCents - additionTotalCents;
+
+        if (difference < 0) {
+            difference = 0;
+        }
+
+        int newEuros = difference / 100;
+        int newCents = difference % 100;
+
+        return new Money(newEuros, newCents);
+    }
 }
