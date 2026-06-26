@@ -29,5 +29,23 @@ public class SimpleDate {
                 this.year == comparedDate.year);
     }
 
+    public SimpleDate afterNumberOfDays(int days) {
+        SimpleDate newDate = new SimpleDate(this.day, this.month, this.year);
+
+        newDate.day = newDate.day + days;
+
+        while (newDate.day > 30) {
+            newDate.day = newDate.day - 30;
+            newDate.month++;
+        }
+
+        while (newDate.month > 12) {
+            newDate.month = newDate.month - 12;
+            newDate.year++;
+        }
+
+        return newDate;
+    }
+
 
 }
