@@ -11,10 +11,12 @@ public class Game {
         this.price = price;
     }
 
+    // Returns game formatted, example 'identifier: title, released, date, price'
     public String toString() {
         return this.identifier + ": " + this.title + ", released " + this.date + ", price " + this.price;
     }
 
+    //Returns boolean if this game object is the same as compared.
     @Override
     public boolean equals(Object compared) {
         if (this == compared) {
