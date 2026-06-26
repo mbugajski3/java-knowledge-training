@@ -52,4 +52,34 @@ public class GameStore {
             return new SimpleDate(day, month, year);
         }
     }
+
+    // Validate if input price is in correct format. Price returns as new Money object.
+    public static Money readMoney(Scanner sc) {
+        while (true) {
+            System.out.println("Enter game price: ");
+            String inputGamePrice = sc.nextLine();
+
+            if (!inputGamePrice.matches("\\d{1,2}\\.\\d{1,2}")) {
+                System.out.println("Wrong price format. Price format should be for example 19.99.");
+                continue;
+            }
+
+            String[] moneyParts = inputGamePrice.split(".");
+
+            int euros = Integer.valueOf(moneyParts[0]);
+            int cents = Integer.valueOf(moneyParts[1]);
+
+            if (euros < 0) {
+                System.out.println("Invalid price. Euros cant be negative.");
+                continue;
+            }
+
+            if (cents < 0 || cents > 100) {
+                System.out.println("Invalid price. Cents cannot be below 100.");
+                continue;
+            }
+
+            return new Money(euros, cents);
+        }
+    }
 }
