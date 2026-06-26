@@ -53,5 +53,20 @@ public class SimpleDate {
         return newDate;
     }
 
+    // Returns this day
+    public int getDay() {
+        return this.day;
+    }
+
+    // Returns this month.
+    public int getMonth() {
+        return this.month;
+    }
+
+    // Returns this year.
+    public int getYear() {
+        return this.year;
+    }
+
 
 }

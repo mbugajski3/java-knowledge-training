@@ -36,4 +36,19 @@ public class Game {
         return this.price;
     }
 
+    // Returns this game identifier.
+    public String getIdentifier() {
+        return this.identifier;
+    }
+
+    // Returns this game title,
+    public String getTitle() {
+        return this.title;
+    }
+
+    // Returns this game date.
+    public SimpleDate getReleaseDate() {
+        return this.date;
+    }
+
 }

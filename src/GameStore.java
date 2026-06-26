@@ -1,10 +1,10 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameStore {
     public static void main(String[] args) {
-        ArrayList<Game> games = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
+        GameRepository gameRepository = new GameRepository();
+        gameRepository.printAllGames();
 
         while(true) {
             System.out.println("Enter game identifier: ");
@@ -26,26 +26,12 @@ public class GameStore {
 
             Game game = new Game(inputIdentifier, inputGameTitle, inputReleaseDate, inputPrice);
 
-            if (!games.contains(game)) {
-                games.add(game);
+            if (gameRepository.addGame(game)) {
+                System.out.println("Game added to database");
             } else {
-                System.out.println("The game is already on the list. Try again.");
+                System.out.println("Game was not added.");
             }
         }
-        System.out.println("=== GAMES LIST ===");
-        for (Game game : games) {
-            System.out.println(game);
-        }
-        System.out.println();
-        System.out.println("Total games in list: " + games.size());
-
-        Money totalValue = new Money(0,0);
-
-        for (Game game : games) {
-            totalValue = totalValue.plus(game.getPrice());
-        }
-
-        System.out.println("Total inventory value: " + totalValue);
     }
 
     // Validate if input date is in correct format. Date returns in new SimpleDate object.

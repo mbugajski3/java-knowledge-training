@@ -47,4 +47,14 @@ public class Money {
 
         return new Money(newEuros, newCents);
     }
+
+    // Returns this euros.
+    public int getEuros() {
+        return this.euros;
+    }
+
+    // Returns this cents.
+    public int getCents() {
+        return this.cents;
+    }
 }
