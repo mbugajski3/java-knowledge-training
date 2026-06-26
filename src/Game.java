@@ -8,6 +8,11 @@ public class Game {
         this.identifier = identifier;
         this.title = title;
         this.date = date;
-        this.price = price
+        this.price = price;
     }
+
+    public String toString() {
+        return this.identifier + ": " + this.title + ", released " + this.date + ", price " + this.price;
+    }
+
 }
