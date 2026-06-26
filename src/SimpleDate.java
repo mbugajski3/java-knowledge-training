@@ -14,5 +14,20 @@ public class SimpleDate {
         return this.day + " . " + this.month + " . " + this.year;
     }
 
+    @Override
+    public boolean equals(Object compared) {
+        if (this == compared) {
+            return true;
+        }
+        if (!(compared instanceof SimpleDate)) {
+            return false;
+        }
+        SimpleDate comparedDate = (SimpleDate) compared;
+
+        return (this.day == comparedDate.day &&
+                this.month == comparedDate.month &&
+                this.year == comparedDate.year);
+    }
+
 
 }
