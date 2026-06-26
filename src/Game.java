@@ -15,4 +15,18 @@ public class Game {
         return this.identifier + ": " + this.title + ", released " + this.date + ", price " + this.price;
     }
 
+    @Override
+    public boolean equals(Object compared) {
+        if (this == compared) {
+            return true;
+        }
+        if (!(compared instanceof Game)) {
+            return false;
+        }
+
+        Game comparedGame = (Game) compared;
+
+        return (this.identifier.equals(comparedGame.identifier));
+    }
+
 }
