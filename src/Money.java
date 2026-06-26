@@ -6,4 +6,12 @@ public class Money {
         this.euros = euros;
         this.cents = cents;
     }
+
+    @Override
+    public String toString() {
+        if (this.cents < 10) {
+            return this.euros + "." + "0" + this.cents + " euro";
+        }
+        return this.euros + "." + this.cents + " euro";
+    }
 }
