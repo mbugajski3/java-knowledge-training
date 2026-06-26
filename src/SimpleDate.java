@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class SimpleDate {
     private int day;
     private int month;
@@ -52,6 +54,4 @@ public class SimpleDate {
 
         return newDate;
     }
-
-
 }
