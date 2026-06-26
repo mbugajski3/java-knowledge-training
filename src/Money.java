@@ -13,4 +13,16 @@ public class Money {
         }
         return this.euros + "." + this.cents + " euro";
     }
+
+    public Money plus(Money addition) {
+        int totalEuros = this.euros + addition.euros;
+        int totalCents = this.cents + addition.cents;
+
+        while (totalCents > 100) {
+            totalEuros++;
+            totalCents = totalCents - 100;
+
+        }
+        return new Money(totalEuros, totalCents);
+    }
 }
