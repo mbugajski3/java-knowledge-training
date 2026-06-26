@@ -1,3 +1,4 @@
+import java.lang.foreign.ValueLayout;
 import java.util.ArrayList;
 import java.util.Scanner;
 import.java.util.ArrayList;
@@ -16,6 +17,12 @@ public class GameStore {
             } else {
                 System.out.println("Enter game title: ");
                 String inputGameTitle = sc.nextLine();
+
+                SimpleDate inputReleaseDate = readDate(sc);
+
+
+
+
             }
         }
     }
@@ -25,7 +32,7 @@ public class GameStore {
         while (true) {
             System.out.println("Enter release date (day.month.year)");
             String inputDate = sc.nextLine();
-            if (!inputDate.matches("\\d{1,2}\\.\\d{1,2}\\d{4}")) {
+            if (!inputDate.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
                 System.out.println("Wrong date format. Use day.month.year, for example 24.03.2017.");
                 continue;
             }
@@ -52,4 +59,34 @@ public class GameStore {
 
             return new SimpleDate(day, month, year);
         }
+    }
+
+    public static Money readMoney(Scanner sc) {
+        while (true) {
+            System.out.println("Enter game price: ");
+            String inputGamePrice = sc.nextLine();
+
+            if (!inputGamePrice.matches("\\d{1,2}\\.\\d{1,2}")) {
+                System.out.println("Wrong price format. Price format should be for example 19.99.");
+                continue;
+            }
+
+            String[] moneyParts = inputGamePrice.split(".");
+
+            int euros = Integer.valueOf(moneyParts[0]);
+            int cents = Integer.valueOf(moneyParts[1]);
+
+            if (euros < 0) {
+                System.out.println("Invalid price. Euros cant be negative.");
+                continue;
+            }
+
+            if (cents < 0 || cents > 100) {
+                System.out.println("Invalid price. Cents cannot be below 100.");
+                continue;
+            }
+
+            return new Money(euros, cents);
+        }
+    }
 }

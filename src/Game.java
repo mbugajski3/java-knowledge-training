@@ -2,9 +2,9 @@ public class Game {
     private String identifier;
     private String title;
     private SimpleDate date;
-    private int price;
+    private Money price;
 
-    public Game(String identifier, String title, SimpleDate date, int price) {
+    public Game(String identifier, String title, SimpleDate date, Money price) {
         this.identifier = identifier;
         this.title = title;
         this.date = date;
